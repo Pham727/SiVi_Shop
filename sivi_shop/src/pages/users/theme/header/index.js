@@ -2,12 +2,14 @@ import { memo, useState } from 'react';
 import "./style.scss";
 import { ROUTERS } from 'utils/router';
 import { formater } from "utils/formater";
+import { BiUser } from "react-icons/bi";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaRegUser } from "react-icons/fa";
 import { AiOutlineMail, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone } from "react-icons/ai";
 import { Link } from "react-router-dom"
 
 const Header = () => {
     const [isShowCategories, setShowCategories] =useState(true);
+    const [isShowHumberger, setShowHumberger] =useState(true);
     const [menu, setMenu] = useState([
         {
             name:"Trang chủ",
@@ -48,6 +50,64 @@ const Header = () => {
     ]);
     return (
         <>
+            <div className={`humberger_menu_overlay${
+                isShowHumberger ? " active" :""}`}
+                onClick={() => setShowHumberger(false)}
+            />
+            <div className={`humberger_menu_wrapper${isShowHumberger ? " show" :""}`}>
+                <div className="header_logo">
+                    <h1>SiVi SHOP</h1>
+                </div>
+                <div className="humberger_menu_cart">
+                    <ul>
+                        <li>
+                            <Link to={""}>
+                                <AiOutlineShoppingCart/> <span>1</span>
+                            </Link>
+                        </li>
+                    </ul>
+                    <div className ="humberger_cart_price">
+                        Giỏ hàng: <span>{formater(101569)}</span>
+                    </div>
+                </div>
+                <div className="humberger_menu_widget">
+                    <div className="humberger_top_right_auth">
+                        <Link to={""}>
+                            <BiUser/> Đăng nhập
+                        </Link>
+                    </div>
+                </div>
+                <div className="humberger_menu_nav">
+                    <ul>
+                        <li>Menu Item</li>
+                    </ul>
+                </div>
+                <div className="humberger_top_right_social">
+                    <ul>
+                        <Link to={""}>
+                            <FaFacebook />
+                        </Link>
+                        <Link to={""}>
+                            <FaInstagram />
+                        </Link>
+                        <Link to={""}>
+                            <FaLinkedin />
+                        </Link>
+                        <Link to={""}>
+                            <FaTwitter />
+                        </Link>
+                    </ul>
+                </div>
+                <div className="humberger_menu_contact">
+                    <ul>
+                        <li>
+                            <i className="fa fa-envelop">sivishop@gmail.com</i>
+                        </li>
+                        <li>Miễn phí đơn hàng từ {formater(200000)}</li>
+                    </ul>
+                </div>
+            </div>
+            
             <div className="header_top">
                 <div className="container">
                     <div className="row">
@@ -95,12 +155,12 @@ const Header = () => {
             </div>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-3">
+                    <div className="col-lg-3">
                         <div className="header_logo">
                             <h1>SiVi SHOP</h1>
                         </div>
                     </div>
-                    <div className="col-xl-6">
+                    <div className="col-lg-6">
                         <nav className="header_menu">
                             <ul>
                                 {menu.map((menu, menuKey) => (
@@ -122,7 +182,7 @@ const Header = () => {
                             </ul>
                         </nav>
                     </div>
-                    <div className="col-xl-3">
+                    <div className="col-lg-3">
                         <div className="header_cart">
                             <div className="header_cart_price">
                                 <span>{formater(1001230)}</span>
@@ -134,6 +194,11 @@ const Header = () => {
                                     </Link>
                                 </li>
                             </ul>
+                        </div>
+                        <div className="humberger_open">
+                            <AiOutlineMenu 
+                                onClick={() => setShowHumberger(true)}
+                            />
                         </div>
                     </div>
                 </div>
