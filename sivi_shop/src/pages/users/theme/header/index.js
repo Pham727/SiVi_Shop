@@ -1,15 +1,17 @@
-import { memo, useState } from 'react';
+import { memo, useState, useEffect } from 'react';
 import "./style.scss";
 import { ROUTERS } from 'utils/router';
 import { formater } from "utils/formater";
 import { BiUser } from "react-icons/bi";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaRegUser } from "react-icons/fa";
 import { AiOutlineMail, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineDownCircle, AiOutlineUpCircle, AiFillMail } from "react-icons/ai";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const Header = () => {
-    const [isShowCategories, setShowCategories] =useState(true);
+    const location = useLocation();
     const [isShowHumberger, setShowHumberger] =useState(false);
+    const [isHome, setIsHome] = useState(location.pathname.length <= 1)
+    const [isShowCategories, setShowCategories] =useState(isHome);
     const [menus, setMenus] = useState([
         {
             name:"Trang chủ",
@@ -56,6 +58,12 @@ const Header = () => {
         "Trái cây",
         "Hải sản"
     ]
+
+    useEffect(() => {
+        const isHome = location.pathname.length <= 1;
+        setIsHome(isHome);
+        setShowCategories(isHome);
+    },[location])
 
     return (
         <>
@@ -274,17 +282,21 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="hero_item">
-                            <div className="hero_text">
-                                <span>Trái cây tươi</span>
-                                <h2>Rau quả <br/>
-                                    sạch 100%
-                                </h2>
-                                <p>Miễn phí giao hàng tận nơi</p>
-                                <Link to="" className="primary-btn">Mua ngay</Link>
+                        {
+                            isHome && (
+                            <div className="hero_item">
+                                <div className="hero_text">
+                                    <span>Trái cây tươi</span>
+                                    <h2>Rau quả <br/>
+                                        sạch 100%
+                                    </h2>
+                                    <p>Miễn phí giao hàng tận nơi</p>
+                                    <Link to="" className="primary-btn">Mua ngay</Link>
+                                </div>
                             </div>
-                        </div>
+                            )
+                        }
+                        
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import HomePage from './pages/users/homePage';
 import ProfilePage from './pages/users/profilePage'
+import ProductsPage from './pages/users/productsPage'
 import { ROUTERS } from './utils/router';
 import {Routes, Route} from 'react-router-dom';
 import MasterLayout from './pages/users/theme/masterLayout';
