@@ -14,6 +14,11 @@ const renderRouterCustom = () => {
                 path: ROUTERS.USER.PROFILE,
                 component: <ProfilePage />
             }
+            ,  
+            {
+                path: ROUTERS.USER.PRODUCTS,
+                component: <ProductsPage />
+            }
         ]
 
     return (

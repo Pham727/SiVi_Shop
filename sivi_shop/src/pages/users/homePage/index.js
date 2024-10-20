@@ -190,8 +190,8 @@ const HomePage = () => {
             tabList.push(<Tab key={index}>{data[key].title}</Tab>);
             const tabPanel = []
             data[key].products.forEach((item, j) => {
-                tabPanel.push(<div className="col-lg-3" key={j}>
-                        <div className="featured_item">
+                tabPanel.push(<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={j}>
+                        <div className="featured_item pl-pr-10">
                             <div className="featured_item_pic"
                             style={{
                                 backgroundImage:`url(${item.img})`

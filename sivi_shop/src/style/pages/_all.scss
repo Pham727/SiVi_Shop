@@ -1,6 +1,7 @@
 @use "sass:map";
 @import "theme";
 @import "responsive";
+@import "@fontsource/be-vietnam-pro";
 
 html,
 body {
@@ -8,7 +9,7 @@ body {
 }
 
 * {
-    font-family: Roboto;
+    font-family: "Be Vietnam Pro";
     padding: 0;
     margin: 0;
 }
@@ -59,6 +60,10 @@ body {
 }
 
 @include Responsive($DESKTOP) {
+    .container{
+        max-width: 1170px;
+    }
+
     .col-xl-3 {
         flex: 0 0 25%;
         max-width: 25%;
@@ -68,9 +73,44 @@ body {
         flex: 0 0 50%;
         max-width: 50%;
     }
+
+    .col-xl-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@include Responsive($MEDIUM_DEVICE) {
+    .container{
+        max-width: 960px;
+    }
+
+    .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .col-lg-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.pl-pr-10 {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 @include Responsive($TABLET_DEVICE) {
+    .container{
+        max-width: 720px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+
     .col-md-6 {
         flex: 0 0 50%;
         max-width: 50%;
@@ -82,14 +122,16 @@ body {
     }
 }
 
-@include Responsive($MEDIUM_DEVICE) {
-    .col-lg-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-}
-
 @include Responsive($WIDE_MOBILE) {
+    .container{
+        max-width: 540px !important;
+    }
+
+    .col-sm-4 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+
     .col-sm-6 {
         flex: 0 0 50%;
         max-width: 50%;
@@ -102,6 +144,15 @@ body {
 }
 
 @include Responsive($SMALL_DEVICES) {
+    .container{
+        max-width: 350px !important;
+    }
+
+    .col-xs-4 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+
     .col-xs-6 {
         flex: 0 0 50%;
         max-width: 50%;

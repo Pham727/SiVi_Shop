@@ -8,7 +8,7 @@
     .categories_slider{
         .categories_slider_item {
             position: relative;
-            height: 290px;
+            height: 270px;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: top center;
@@ -97,6 +97,8 @@
             position: relative;
             overflow: hidden;
             background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
 
             .featured_item_pic_hover {
                 position: absolute;
@@ -162,6 +164,15 @@
     display: flex;
     gap: 20px;
     margin-bottom: 30px;
+    
+    @include Responsive($SMALL_DEVICES) {
+       flex-direction: column;
+    }
+
+    @include Responsive($WIDE_MOBILE) {
+        flex-direction: column;
+     }
+ 
 
     img {
         width: 100%;

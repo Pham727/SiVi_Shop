@@ -4,13 +4,13 @@ import { ROUTERS } from 'utils/router';
 import { formater } from "utils/formater";
 import { BiUser } from "react-icons/bi";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaRegUser } from "react-icons/fa";
-import { AiOutlineMail, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineShoppingCart, AiOutlineMenu, AiOutlinePhone, AiOutlineDownCircle, AiOutlineUpCircle, AiFillMail } from "react-icons/ai";
 import { Link } from "react-router-dom"
 
 const Header = () => {
     const [isShowCategories, setShowCategories] =useState(true);
-    const [isShowHumberger, setShowHumberger] =useState(true);
-    const [menu, setMenu] = useState([
+    const [isShowHumberger, setShowHumberger] =useState(false);
+    const [menus, setMenus] = useState([
         {
             name:"Trang chủ",
             path: ROUTERS.USER.HOME,
@@ -48,6 +48,15 @@ const Header = () => {
         },
 
     ]);
+
+    const categories = [
+        "Thịt tươi",
+        "Rau củ",
+        "Nước trái cây",
+        "Trái cây",
+        "Hải sản"
+    ]
+
     return (
         <>
             <div className={`humberger_menu_overlay${
@@ -79,7 +88,34 @@ const Header = () => {
                 </div>
                 <div className="humberger_menu_nav">
                     <ul>
-                        <li>Menu Item</li>
+                       {menus.map((menu, menuKey) => (
+                            <li key={menuKey}>
+                                <Link to={menu.path}
+                                    onClick ={() => {
+                                        const newMenus = [...menus];
+                                        newMenus[menuKey].isShowSubmenu = !newMenus[menuKey].isShowSubmenu;
+                                        setMenus(newMenus);
+                                    }}>
+                                    {menu.name}
+                                    {menu.child && (menu.isShowSubmenu ? (
+                                        <AiOutlineDownCircle />
+                                    ) : (
+                                        <AiOutlineUpCircle />
+                                    ))}
+                                </Link>
+                                {menu.child && (
+                                    <ul className={`header_menu_dropdown ${
+                                        menu.isShowSubmenu ? "show_menus" : ""
+                                    }`}>
+                                        {menu.child.map((childItem, childKey) => (
+                                            <li key={childKey}>
+                                                <Link to={childItem.path}>{childItem.name}</Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                       ))}
                     </ul>
                 </div>
                 <div className="humberger_top_right_social">
@@ -101,7 +137,7 @@ const Header = () => {
                 <div className="humberger_menu_contact">
                     <ul>
                         <li>
-                            <i className="fa fa-envelop">sivishop@gmail.com</i>
+                            <AiFillMail /><i>sivishop@gmail.com</i>
                         </li>
                         <li>Miễn phí đơn hàng từ {formater(200000)}</li>
                     </ul>
@@ -115,7 +151,7 @@ const Header = () => {
                             <ul>
                                 <li><AiOutlineMail />ngocha.pham1202@gmail.com
                                 </li>
-                                <li>Mien phi ship don hang tu {formater(200000)}</li>
+                                <li>Miễn phí ship đơn hàng từ {formater(200000)}</li>
                             </ul>
                         </div>
                         <div className="col-6 header_top_right">
@@ -144,7 +180,7 @@ const Header = () => {
                                     <Link to={""}>
                                         <FaRegUser />
                                     </Link>
-                                    <span>Dang nhap</span>
+                                    <span>Đăng nhập</span>
 
                                 </li>
 
@@ -163,7 +199,7 @@ const Header = () => {
                     <div className="col-lg-6">
                         <nav className="header_menu">
                             <ul>
-                                {menu.map((menu, menuKey) => (
+                                {menus.map((menu, menuKey) => (
                                     <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
                                         <Link to={menu.path}>{menu.name}</Link>
                                         {
@@ -205,29 +241,22 @@ const Header = () => {
             </div>
             <div className="container">
                 <div className="row hero_categories_container">
-                    <div className="col-lg-3 hero_categories">
+                    <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 hero_categories">
                         <div className="hero_categories_all" onClick={() => setShowCategories(!isShowCategories)}>
                             <AiOutlineMenu/>
                             Danh mục sản phẩm
                         </div>
                         {isShowCategories && (
                             <ul className={isShowCategories ? "" : "hidden"}>
-                            <li>
-                                <Link to="">Thịt tươi</Link>
-                            </li>
-                            <li>
-                                <Link to="">Rau củ</Link>
-                            </li>
-                            <li>
-                                <Link to="">Trái cây</Link>
-                            </li>
-                            <li>
-                                <Link to="">Hải sản</Link>
-                            </li>
-                        </ul>
+                                {categories.map((category, key)=>(
+                                    <li>
+                                        <Link to={ROUTERS.USER.PRODUCTS}>{category}</Link>
+                                    </li>
+                                ))}
+                            </ul>
                         )}
                     </div>
-                    <div className="col-lg-9 hero_search_container">
+                    <div className="col-lg-9 col-md-12 col-sm-12 col-xs-12 hero_search_container">
                         <div className="hero_search">
                             <div className="hero_search_form">
                                 <form>
