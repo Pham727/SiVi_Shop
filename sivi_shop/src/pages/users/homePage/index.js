@@ -1,11 +1,9 @@
 import { memo } from "react";
-import { Link } from "react-router-dom"
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import "./style.scss";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
-import { formater } from "utils/formater";
+import { ProductCard } from "component"
 import cat1Img from "assets/users/images/categories/cat_1.jpg"
 import cat2Img from "assets/users/images/categories/cat_2.jpg"
 import cat3Img from "assets/users/images/categories/cat_3.jpg"
@@ -190,30 +188,9 @@ const HomePage = () => {
             tabList.push(<Tab key={index}>{data[key].title}</Tab>);
             const tabPanel = []
             data[key].products.forEach((item, j) => {
-                tabPanel.push(<div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={j}>
-                        <div className="featured_item pl-pr-10">
-                            <div className="featured_item_pic"
-                            style={{
-                                backgroundImage:`url(${item.img})`
-                            }}
-                            >
-                                <ul className="featured_item_pic_hover">
-                                    <li>
-                                        <AiOutlineEye />
-                                    </li>
-                                    <li>
-                                        <AiOutlineShoppingCart />
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            <div className="featured_item_text">
-                                <h6>
-                                    <Link to="">{item.name}</Link>
-                                </h6>
-                                <h5>{formater(item.price)}</h5>
-                            </div>
-                        </div>
+                tabPanel.push(
+                    <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={j}>
+                        <ProductCard img = {item.img} name = {item.name} price = {item.price} />
                     </div>)
             });
             tabPanels.push(tabPanel);
